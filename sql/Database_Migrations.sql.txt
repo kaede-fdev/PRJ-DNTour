@@ -1,0 +1,17 @@
+create database DNTours;
+use DNTours;
+
+create table Users (
+    UserId UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    Fullname NVARCHAR(100) NOT NULL,
+    Avatar NVARCHAR(255),
+    Password NVARCHAR(255) NOT NULL,
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    Phone NVARCHAR(20),
+    Budget DECIMAL(18, 2),
+    CreateAt DATETIME DEFAULT GETDATE(),
+    UpdateAt DATETIME DEFAULT GETDATE()
+);
+
+drop table Users;
+drop database ITour;
