@@ -2,14 +2,17 @@ package controllers.Auth;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import service.impl.IAuthService;
-import service.interfaces.AuthSerivce;
+import model.User;
+import service.interfaces.IAuthService;
+import service.impl.AuthSerivce;
 import utils.AppConstants;
+import utils.MailSender;
 
 /**
  *
@@ -18,55 +21,75 @@ import utils.AppConstants;
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
 public class RegisterServlet extends HttpServlet {
 
+    private void renderPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("pageContent", AppConstants.AppViewsModulesPrefix + "/Pages/Auth/register-page.jsp");
+        request.setAttribute("pageTitle", "DNTour - Đăng ký");
+        request.getRequestDispatcher(AppConstants.AppViewsPrefix + "/Auth/Pages/register.jsp").forward(request, response);
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String fullnameStr = request.getParameter("fullname");
-        String passwordStr = request.getParameter("password");
-        String emailStr = request.getParameter("email");
-        String confirmPasswordStr = request.getParameter("confirmPassword");
+        try {
+            String fullnameStr = request.getParameter("fullname");
+            String passwordStr = request.getParameter("password");
+            String emailStr = request.getParameter("email");
+            String confirmPasswordStr = request.getParameter("confirmPassword");
 
-        System.out.println(fullnameStr);
-        System.out.println(passwordStr);
-        System.out.println(emailStr);
-        System.out.println(confirmPasswordStr);
+            System.out.println(fullnameStr);
+            System.out.println(passwordStr);
+            System.out.println(emailStr);
+            System.out.println(confirmPasswordStr);
 
-        // Kiểm tra xem các trường thông tin có bị null hoặc rỗng không
-        if (fullnameStr == null || fullnameStr.isEmpty()
-                || passwordStr == null || passwordStr.isEmpty()
-                || emailStr == null || emailStr.isEmpty()
-                || confirmPasswordStr == null || confirmPasswordStr.isEmpty()) {
-            request.setAttribute("errorMessage", "Vui lòng điền đầy đủ thông tin.");
-            request.setAttribute("pageContent", AppConstants.AppViewsModulesPrefix + "/Pages/Auth/register-page.jsp");
-            request.setAttribute("pageTitle", "DNTour - Đăng ký");
-            request.getRequestDispatcher(AppConstants.AppViewsPrefix + "/Auth/Pages/register.jsp").forward(request, response);
-            return;
+            // Kiểm tra xem các trường thông tin có bị null hoặc rỗng không
+            if (fullnameStr == null || fullnameStr.isEmpty()
+                    || passwordStr == null || passwordStr.isEmpty()
+                    || emailStr == null || emailStr.isEmpty()
+                    || confirmPasswordStr == null || confirmPasswordStr.isEmpty()) {
+                request.setAttribute("errorMessage", "Vui lòng điền đầy đủ thông tin.");
+                renderPage(request, response);
+                return;
+            }
+
+            // Kiểm tra xác nhận mật khẩu
+            if (!passwordStr.equals(confirmPasswordStr)) {
+                request.setAttribute("errorMessage", "Mật khẩu và xác nhận mật khẩu không khớp.");
+                renderPage(request, response);
+                return;
+            }
+
+            IAuthService authService = new AuthSerivce();
+            // Kiểm tra người dùng đã tồn tại hay chưa
+            User foundUser = authService.findUserByEmail(emailStr);
+            System.out.println(foundUser);
+            if (foundUser != null && foundUser.getEmail().equals(emailStr)) {
+                request.setAttribute("errorMessage", "Người dùng đã tồn tại!");
+                renderPage(request, response);
+                return;
+            }
+
+            String verifyLink = "http://localhost:8080/ITour/verifyaccount?email=vuvo070403@gmail.com";
+            String subject = "DANATOUR | Xác thực tài khoản!";
+            String content = "<p>Click vào link bên dưới để xác thực tài khoản:</p>"
+                    + "<a href=\"" + verifyLink + "\">Click Here</a>";
+
+            MailSender mailSender = new MailSender();
+
+            mailSender.sendEmail(emailStr, subject, content);
+
+            // Tạo mới người dùng
+            authService.createNewUser(fullnameStr, emailStr, passwordStr);
+            // Chuyển hướng người dùng sau khi đăng ký thành công
+            response.sendRedirect(request.getContextPath() + "/checkverify");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-
-        // Kiểm tra xác nhận mật khẩu
-        if (!passwordStr.equals(confirmPasswordStr)) {
-            request.setAttribute("errorMessage", "Mật khẩu và xác nhận mật khẩu không khớp.");
-            request.setAttribute("pageContent", AppConstants.AppViewsModulesPrefix + "/Pages/Auth/register-page.jsp");
-            request.setAttribute("pageTitle", "DNTour - Đăng ký");
-            request.getRequestDispatcher(AppConstants.AppViewsPrefix + "/Auth/Pages/register.jsp").forward(request, response);
-            return;
-        }
-
-        // Tạo mới người dùng
-        IAuthService authService = new AuthSerivce();
-        authService.createNewUser(fullnameStr, emailStr, passwordStr);
-        // Chuyển hướng người dùng sau khi đăng ký thành công
-        response.sendRedirect(request.getContextPath() + "/login");
-
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("pageContent", AppConstants.AppViewsModulesPrefix + "/Pages/Auth/register-page.jsp");
-        request.setAttribute("pageTitle", "DNTour - Đăng ký");
-
-        request.getRequestDispatcher(AppConstants.AppViewsPrefix + "/Auth/Pages/register.jsp").forward(request, response);
-
+        renderPage(request, response);
     }
 
     @Override

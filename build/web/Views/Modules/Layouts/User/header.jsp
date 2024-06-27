@@ -4,6 +4,8 @@
     Author     : VJames
 --%>
 
+<%@page import="utils.Jwt"%>
+<%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,13 +15,13 @@
               rel="stylesheet" >
     </head>
     <body>
-        <header class="p-3 bg-dark text-white">
+        <header class="p-2 bg-dark text-white">
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                     <a href="/ITour/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                         <p class="text-center" style="font-size: 32px; color: white; font-weight: bold; margin: 0">DNTours</p>
                     </a>
-                    <ul class="nav  col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="margin-left: 30px;">
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="margin-left: 30px;">
                         <%
                             String requestURI = request.getRequestURI();
                             String[] parts = requestURI.split("/");
@@ -43,19 +45,42 @@
                             <a href="contact" class="nav-link pb-2 <%= pageName.equals("contact") ? "text-white" : "text-secondary"%>">Liên hệ</a>
                         </li>
                     </ul>
-                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                        <input type="search" class="form-control form-control-dark"
-                               placeholder="Search..."
-                               arial-label="Search"
-                               />
-                    </form>
+
                     <div>
+                        <%-- Kiểm tra cookie isAuth --%>
+                        <%
+                            Cookie[] cookies = request.getCookies();
+                            boolean isAuthenticated = false;
+                            User currentUser = null;
+                            if (cookies != null) {
+                                for (Cookie cookie : cookies) {
+                                    if (cookie.getName().equals("isAuth") && cookie.getValue().equals("true") || cookie.getName().equals("accessToken")) {
+                                        isAuthenticated = true;
+                                    }
+                                    if (cookie.getName().equals("accessToken")) {
+                                        currentUser = Jwt.extractUserFromToken(cookie.getValue());
+                                    }
+                                }
+                            }
+                            if (isAuthenticated) {
+                                // Nếu đã xác thực, hiển thị hình ảnh người dùng và nút logout
+%>
+                        <div class="d-flex gap-4 align-items-center justify-content-center">
+                            <!--<img src="path_to_user_image" alt="User Image" style="width: 40px; height: 40px; border-radius: 50%;">-->
+                            <p class="text-white m-0"><%= currentUser.getFullname()%></p>
+                            <a href="logout" class="text-decoration-none">
+                                <button type="button" class="btn btn-outline-light ms-2">Logout</button>
+                            </a>
+                        </div>
+                        <% } else { %>
+                        <%-- Nếu chưa xác thực, hiển thị nút login và register --%>
                         <a href="login" class="text-decoration-none">
-                            <button type="button" class="btn btn-outline-light me-2">Login</button>
+                            <button type="button" class="btn btn-outline-light me-2">Đăng ký</button>
                         </a>
                         <a href="register" class="text-decoration-none">
-                            <button type="button" class="btn btn-warning">Register</button>
+                            <button type="button" class="btn btn-warning">Đăng nhập</button>
                         </a>
+                        <% }%>
                     </div>
 
                 </div>

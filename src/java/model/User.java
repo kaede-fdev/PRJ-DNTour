@@ -1,29 +1,40 @@
+package model;
 
 import java.util.Date;
 
 public class User {
 
+    private String id;
     private String fullname;
     private String avatar;
     private String password;
     private String email;
     private String phone;
     private String budget;
+    private String role;
+    private boolean verify;
     private Date createAt;
     private Date updateAt;
 
-    public User(String fullname, String avatar, String password, String email, String phone, String budget, Date createAt, Date updateAt) {
+    public User(String id, String fullname, String avatar, String password, String email, String phone, String budget, String role, boolean verify, Date createAt, Date updateAt) {
+        this.id = id;
         this.fullname = fullname;
         this.avatar = avatar;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.budget = budget;
+        this.role = role;
+        this.verify = verify;
         this.createAt = createAt;
         this.updateAt = updateAt;
     }
 
     public User() {
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getFullname() {
@@ -50,12 +61,24 @@ public class User {
         return budget;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public boolean isVerify() {
+        return verify;
+    }
+
     public Date getCreateAt() {
         return createAt;
     }
 
     public Date getUpdateAt() {
         return updateAt;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setFullname(String fullname) {
@@ -82,6 +105,14 @@ public class User {
         this.budget = budget;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setVerify(boolean verify) {
+        this.verify = verify;
+    }
+
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
     }
@@ -92,33 +123,44 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "fullname=" + fullname + ", avatar=" + avatar + ", password=" + password + ", email=" + email + ", phone=" + phone + ", budget=" + budget + ", createAt=" + createAt + ", updateAt=" + updateAt + '}';
+        return "User{" + "id=" + id + ", fullname=" + fullname + ", avatar=" + avatar + ", password=" + password + ", email=" + email + ", phone=" + phone + ", budget=" + budget + ", role=" + role + ", verify=" + verify + ", createAt=" + createAt + ", updateAt=" + updateAt + '}';
     }
 
     //Builder
     private User(Builder builder) {
+        this.id = builder.id;
         this.fullname = builder.fullname;
         this.avatar = builder.avatar;
         this.password = builder.password;
         this.email = builder.email;
         this.phone = builder.phone;
         this.budget = builder.budget;
+        this.role = builder.role;
+        this.verify = builder.verify;
         this.createAt = builder.createAt;
         this.updateAt = builder.updateAt;
     }
 
     public static class Builder {
 
+        private String id;
         private String fullname;
         private String avatar;
         private String password;
         private String email;
         private String phone;
         private String budget;
+        private String role;
+        private boolean verify;
         private Date createAt;
         private Date updateAt;
 
         public Builder() {
+        }
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
         }
 
         public Builder fullname(String fullname) {
@@ -148,6 +190,16 @@ public class User {
 
         public Builder budget(String budget) {
             this.budget = budget;
+            return this;
+        }
+
+        public Builder role(String role) {
+            this.role = role;
+            return this;
+        }
+
+        public Builder verify(boolean verify) {
+            this.verify = verify;
             return this;
         }
 

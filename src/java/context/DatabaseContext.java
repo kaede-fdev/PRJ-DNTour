@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class DatabaseContext {
 
     private static final String DRIVER_NAME = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=ITour";
+    private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=DNTours";
     private static final String USER_DB = "admin";
     private static final String PASS_DB = "admin...1122";
 
