@@ -15,11 +15,11 @@
               rel="stylesheet" >
     </head>
     <body>
-        <header class="p-2 bg-dark text-white">
+        <header class="p-2 bg-dark text-white" style="position: fixed; width: 100vw; z-index: 100; ">
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <a href="/ITour/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                        <p class="text-center" style="font-size: 32px; color: white; font-weight: bold; margin: 0">DNTours</p>
+                    <a href="/DanaTours/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <p class="text-center" style="font-size: 32px; color: white; font-weight: bold; margin: 0">DaNaTours</p>
                     </a>
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style="margin-left: 30px;">
                         <%
@@ -75,10 +75,10 @@
                         <% } else { %>
                         <%-- Nếu chưa xác thực, hiển thị nút login và register --%>
                         <a href="login" class="text-decoration-none">
-                            <button type="button" class="btn btn-outline-light me-2">Đăng ký</button>
+                            <button type="button" class="btn btn-outline-light me-2">Đăng nhập</button>
                         </a>
                         <a href="register" class="text-decoration-none">
-                            <button type="button" class="btn btn-warning">Đăng nhập</button>
+                            <button type="button" class="btn btn-warning">Đăng ký</button>
                         </a>
                         <% }%>
                     </div>

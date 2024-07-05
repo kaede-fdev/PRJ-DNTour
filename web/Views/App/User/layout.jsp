@@ -11,6 +11,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>${pageTitle}</title>
     </head>
+    <style>
+        body::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: #B2b2b2;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #212529;
+            border-radius: 4px;
+        }
+    </style>
     <body>
         <header>
             <jsp:include page="/Views/Modules/Layouts/User/header.jsp"/>
@@ -18,13 +32,12 @@
         <!--        <nav>
         <jsp:include page="/Views/Modules/Layouts/User/navigation.jsp"/>
     </nav>-->
-        <main>
-            <div id="user-main-container" class="container">
+        <main style="padding-top: 64px;">
+            <div class="">
                 <jsp:include page="${pageContent}"/>
             </div>
         </main>
-        <!--        <footer>
+
         <jsp:include page="/Views/Modules/Layouts/User/footer.jsp"/>
-    </footer>-->
     </body>
 </html>

@@ -67,7 +67,9 @@ public class RegisterServlet extends HttpServlet {
                 return;
             }
 
-            String verifyLink = "http://localhost:8080/ITour/verifyaccount?email=vuvo070403@gmail.com";
+            String fromHost = "http://localhost:8080/DanaTours/verifyaccount?email=";
+
+            String verifyLink = fromHost + emailStr;
             String subject = "DANATOUR | Xác thực tài khoản!";
             String content = "<p>Click vào link bên dưới để xác thực tài khoản:</p>"
                     + "<a href=\"" + verifyLink + "\">Click Here</a>";
