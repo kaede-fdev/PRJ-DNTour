@@ -36,6 +36,9 @@
                             <a href="service" class="nav-link pb-2 <%= pageName.equals("service") ? "text-white" : "text-secondary"%>">Dịch vụ</a>
                         </li>
                         <li>
+                            <a href="suggest" class="nav-link pb-2 <%= pageName.equals("suggest") ? "text-white" : "text-secondary"%>">Gợi ý</a>
+                        </li>
+                        <li>
                             <a href="introduce" class="nav-link pb-2 <%= pageName.equals("introduce") ? "text-white" : "text-secondary"%>">Giới thiệu</a>
                         </li>
                         <li>
@@ -63,8 +66,7 @@
                                 }
                             }
                             if (isAuthenticated) {
-                                // Nếu đã xác thực, hiển thị hình ảnh người dùng và nút logout
-%>
+                        %>
                         <div class="d-flex gap-4 align-items-center justify-content-center">
                             <!--<img src="path_to_user_image" alt="User Image" style="width: 40px; height: 40px; border-radius: 50%;">-->
                             <p class="text-white m-0"><%= currentUser.getFullname()%></p>

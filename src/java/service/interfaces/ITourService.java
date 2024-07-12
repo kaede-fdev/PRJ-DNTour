@@ -17,4 +17,6 @@ public interface ITourService {
     public Tour getTourById(int id);
 
     public List<TourImages> getAllTourImagesById(int id);
+
+    public List<Tour> getTopThreeToursMinusById(int id);
 }

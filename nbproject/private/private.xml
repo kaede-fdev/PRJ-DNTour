@@ -3,38 +3,41 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/model/RestaurantImages.java</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Layouts/User/footer.jsp</file>
             <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Pages/User/home-page.jsp</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/service/interfaces/IRestaurantService.java</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/Auth/RegisterServlet.java</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Pages/User/contact-page.jsp</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/Payment/VnPayAjaxServlet.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/App/User/Pages/news.jsp</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/User/ContactServlet.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/App/User/Pages/suggest.jsp</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Pages/User/news-page.jsp</file>
             <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/User/HomeServlet.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/User/HotelSearchServlet.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/Payment/PaymentServlet.java</file>
             <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Layouts/User/header.jsp</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/App/User/Pages/tour-details.jsp</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/service/impl/PaymentService.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/Payment/PaymentReturnServlet.java</file>
             <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/User/HotelDetailsServlet.java</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/Auth/LoginServlet.java</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/model/HotelImages.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/service/impl/HotelSearchService.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/App/User/Pages/home.jsp</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/App/User/Pages/introduce.jsp</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Pages/User/suggest-page.jsp</file>
             <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Pages/User/tour-details-page.jsp</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/service/interfaces/IAuthService.java</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Pages/User/hotel-details-page.jsp</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/service/impl/RestaurantService.java</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/service/impl/HotelService.java</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/service/interfaces/IHotelService.java</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/App/User/layout.jsp</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/model/Restaurant.java</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Pages/Auth/login-page.jsp</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Pages/User/restaurant-details-page.jsp</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/App/User/Pages/payment-return.jsp</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/service/interfaces/IHotelSearch.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/service/impl/TourService.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/model/Payment.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/App/User/Pages/payment.jsp</file>
             <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/App/User/Pages/hotel-details.jsp</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/User/RestaurantDetailsServlet.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Pages/User/hotel-search-page.jsp</file>
             <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/User/TourDetailsServlet.java</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/App/User/Pages/restaurant-details.jsp</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/model/Hotel.java</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/App/Auth/layout.jsp</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Pages/User/introduce-page.jsp</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/App/User/Pages/restaurant-search.jsp</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/User/ServiceServlet.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Pages/User/payment-return-page.jsp</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/Payment/Config.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/User/SuggestServlet.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/User/RestaurantSearchServlet.java</file>
             <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/service/impl/AuthSerivce.java</file>
-            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Pages/User/service-page.jsp</file>
             <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/src/java/controllers/Filters/AuthFilter.java</file>
+            <file>file:/E:/JAVA%20PROJECT/NetBeans/Projects/ITourResource/web/Views/Modules/Pages/User/service-page.jsp</file>
         </group>
     </open-files>
 </project-private>

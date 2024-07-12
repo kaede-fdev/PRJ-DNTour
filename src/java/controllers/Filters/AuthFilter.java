@@ -26,7 +26,22 @@ public class AuthFilter implements Filter {
 
     private FilterConfig filterConfig = null;
 
-    private static final String[] ALLOWED_PATHS = {"/home", "/service", "/login", "/register", "/tourdetails", "/hoteldetails", "/restaurantdetails"};
+    private static final String[] ALLOWED_PATHS = {
+        "/home",
+        "/service",
+        "/login",
+        "/verifyaccount",
+        "/register",
+        "/suggest",
+        "/tourdetails",
+        "/hoteldetails",
+        "/restaurantdetails",
+        "/payment",
+        "/vnpayajax",
+        "/paymentreturn",
+        "/introduce",
+        "/restaurantsearch",
+        "/hotelsearch"};
 
     public AuthFilter() {
     }

@@ -21,6 +21,7 @@ public class TourService extends DatabaseContext implements ITourService {
     private final String getAllToursQuery = "SELECT * FROM Tours";
     private final String getTourByIdQuery = "SELECT * FROM Tours WHERE Id = ?";
     private final String getAllTourImagesQuery = "SELECT * FROM TourImages WHERE TourId = ?";
+    private final String getTopThreeToursMinusByIdQuery = "SELECT TOP 3 * FROM Tours WHERE Id <> ? ORDER BY CreateAt DESC";
 
     @Override
     public List<Tour> getTopSixTours() {
@@ -113,18 +114,55 @@ public class TourService extends DatabaseContext implements ITourService {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    TourImages tourImage = new TourImages();
-                    tourImage.setId(resultSet.getInt("Id"));
-                    tourImage.setTourId(resultSet.getInt("TourId"));
-                    tourImage.setUrl(resultSet.getString("Url"));
-                    tourImage.setCreateAt(resultSet.getDate("CreateAt"));
-                    tourImage.setUpdateAt(resultSet.getDate("UpdateAt"));
-                    tourImagesList.add(tourImage);
+                    tourImagesList.add(mapResultSetToTourImages(resultSet));
                 }
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return tourImagesList;
+    }
+
+    public List<Tour> getTopThreeToursMinusById(int id) {
+        List<Tour> tours = new ArrayList<>();
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(getTopThreeToursMinusByIdQuery)) {
+
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    tours.add(mapResultSetToTour(resultSet));
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return tours;
+    }
+
+    private Tour mapResultSetToTour(ResultSet resultSet) throws SQLException {
+        Tour tour = new Tour();
+        tour.setId(resultSet.getInt("Id"));
+        tour.setHotelId(resultSet.getInt("HotelId"));
+        tour.setTitle(resultSet.getString("Title"));
+        tour.setVehicle(resultSet.getString("Vehicle"));
+        tour.setDuration(resultSet.getString("Duration"));
+        tour.setStartDay(resultSet.getString("StartDay"));
+        tour.setDescription(resultSet.getString("Description"));
+        tour.setTotalPrice(resultSet.getInt("TotalPrice"));
+        tour.setForChildTotalPrice(resultSet.getInt("ForChildTotalPrice"));
+        tour.setBackgroundImage(resultSet.getString("BackgroundImage"));
+        tour.setCreateAt(resultSet.getDate("CreateAt"));
+        tour.setCpdateAt(resultSet.getDate("UpdateAt"));
+        return tour;
+    }
+
+    private TourImages mapResultSetToTourImages(ResultSet resultSet) throws SQLException {
+        TourImages tourImage = new TourImages();
+        tourImage.setId(resultSet.getInt("Id"));
+        tourImage.setTourId(resultSet.getInt("TourId"));
+        tourImage.setUrl(resultSet.getString("Url"));
+        tourImage.setCreateAt(resultSet.getDate("CreateAt"));
+        tourImage.setUpdateAt(resultSet.getDate("UpdateAt"));
+        return tourImage;
     }
 }

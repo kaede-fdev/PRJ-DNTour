@@ -49,6 +49,7 @@ public class AuthSerivce extends DatabaseContext implements IAuthService {
                 user.setEmail(resultSet.getString("Email"));
                 user.setPassword(resultSet.getString("Password"));
                 user.setCreateAt(resultSet.getTimestamp("CreateAt"));
+                user.setPhone(resultSet.getString("Phone"));
                 user.setRole(resultSet.getString("Role"));
                 return user;
             }

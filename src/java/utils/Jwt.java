@@ -29,6 +29,7 @@ public class Jwt {
                 .withClaim("id", user.getId())
                 .withClaim("fullname", user.getFullname())
                 .withClaim("email", user.getEmail())
+                .withClaim("phone", user.getPhone())
                 .withClaim("role", user.getRole())
                 .sign(Algorithm.HMAC256(SECRET_KEY));
     }
@@ -41,6 +42,7 @@ public class Jwt {
         user.setFullname(decodedJWT.getClaim("fullname").asString());
         user.setEmail(decodedJWT.getClaim("email").asString());
         user.setRole(decodedJWT.getClaim("role").asString());
+        user.setPhone(decodedJWT.getClaim("phone").asString());
 
         return user;
     }

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,6 +20,20 @@
                 display: flex;
                 justify-content: center;
             }
+            .content>div>figure>img {
+                border-radius: 8px;
+            }
+            .content>div>figure>iframe {
+                border-radius: 8px;
+                width: 100%;
+                height: 500px;
+
+            }
+            .content>div>figure {
+                margin: 0 !important;
+                height: 600px !important;
+                padding-bottom: 0 !important;
+            }
 
         </style>
     </head>
@@ -26,17 +41,17 @@
         <section class="w-100">
             <div class="container">
                 <div style="padding-top: 80px;">
-                    <h1 class="w-full text-center fw-bold">Tour Bà Nà Hill</h1>
+                    <h1 class="w-full text-center fw-bold">${tour.getTitle()}</h1>
                     <div class="d-flex flex-wrap justify-content-center p-4" style="gap: 20px; background: #fff; border-radius: 20px;  color: #000;">
                         <div class="d-flex align-items-center justify-content-center gap-2">
                             <i class="bi bi-calendar-check-fill"></i>
-                            <p class="fw-bold">Thời gian: 1 ngày</p>
+                            <p class="fw-bold">Thời gian: ${tour.getDuration()}</p>
                         </div>
                         <div class="d-flex align-items-center justify-content-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-car-front-fill" viewBox="0 0 16 16">
                             <path d="M2.52 3.515A2.5 2.5 0 0 1 4.82 2h6.362c1 0 1.904.596 2.298 1.515l.792 1.848c.075.175.21.319.38.404.5.25.855.715.965 1.262l.335 1.679q.05.242.049.49v.413c0 .814-.39 1.543-1 1.997V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.338c-1.292.048-2.745.088-4 .088s-2.708-.04-4-.088V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.892c-.61-.454-1-1.183-1-1.997v-.413a2.5 2.5 0 0 1 .049-.49l.335-1.68c.11-.546.465-1.012.964-1.261a.8.8 0 0 0 .381-.404l.792-1.848ZM3 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2m10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2M6 8a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2zM2.906 5.189a.51.51 0 0 0 .497.731c.91-.073 3.35-.17 4.597-.17s3.688.097 4.597.17a.51.51 0 0 0 .497-.731l-.956-1.913A.5.5 0 0 0 11.691 3H4.309a.5.5 0 0 0-.447.276L2.906 5.19Z"/>
                             </svg>
-                            <p class="fw-bold">Phương tiện:  Oto</p>
+                            <p class="fw-bold">Phương tiện:  ${tour.getVehicle()}</p>
                         </div>
                         <div class="d-flex align-items-center justify-content-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-buildings-fill" viewBox="0 0 16 16">
@@ -73,38 +88,38 @@
                     <div class="d-flex flex-row justify-content-between align-items-center" style="background: #212529; padding: 16px; color: #fff; border-radius: 8px;">
                         <div class="d-flex gap-4">
                             <div>
-                                <p class="fw-bold">Khởi hành: <span style="color: #ffc107;">Hằng ngày</span></p>
+                                <p class="fw-bold">Khởi hành: <span style="color: #ffc107;">${tour.getStartDay()}</span></p>
                             </div>
                             <div>
-                                <p class="fw-bold">Giá Tour <span style="color: #ffc107;">820.000 đ</span></p>
+                                <p class="fw-bold">Giá Tour <span style="color: #ffc107;">${tour.getFormattedMaxPrice()} đ</span></p>
                             </div>
                             <div>
-                                <p class="fw-bold">Giá cho trẻ em <span style="color: #ffc107;">520.000 đ</span></p>
+                                <p class="fw-bold">Giá cho trẻ em <span style="color: #ffc107;">${tour.getFormattedMinPrice()} đ</span></p>
                             </div>
                         </div>
-                        <button class="btn btn-warning fw-bold">
+                        <a href="payment?tourId=${tour.getId()}" class="btn btn-warning fw-bold">
                             Đặt tour ngay
-                        </button>
+                        </a>
                     </div>
 
                     <div style="padding: 24px 0px;">
                         <h4 class="text-center fw-bold" style="padding-bottom: 16px;">CÁC ĐỊA ĐIỂM TRONG TOURS</h4>
                         <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
                             <div class="carousel-indicators">
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                <c:forEach var="image" items="${tourImages}" varStatus="status">
+                                    <button type="button" data-bs-target="#carouselExampleIndicators"
+                                            data-bs-slide-to="${status.index}"
+                                            class="${status.index == 0 ? 'active' : ''}"
+                                            aria-current="${status.index == 0 ? 'true' : 'false'}"
+                                            aria-label="Slide ${status.index + 1}"></button>
+                                </c:forEach>
                             </div>
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="https://danangbest.com/uploads/thumb/1686996052ho-tam-suoi-than-tai.webp" style="width: 100%; height: 420px; object-fit: cover; border-radius: 12px;" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://danangbest.com/uploads/thumb/1686996052ho-tam-suoi-than-tai.webp" style="width: 100%; height: 420px; object-fit: cover; border-radius: 12px;" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://danangbest.com/uploads/thumb/1686996052ho-tam-suoi-than-tai.webp" style="width: 100%; height: 420px; object-fit: cover; border-radius: 12px;" class="d-block w-100" alt="...">
-                                </div>
+                                <c:forEach var="image" items="${tourImages}" varStatus="status">
+                                    <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+                                        <img src="${image.getUrl()}" style="width: 100%; height: 460px; object-fit: cover; border-radius: 12px;" class="d-block w-100" alt="...">
+                                    </div>
+                                </c:forEach>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -120,38 +135,50 @@
                     <div>
                         <h4 class="text-center fw-bold" style="padding-bottom: 16px;">VỀ TOUR CỦA CHÚNG TÔI</h4>
                         <div class="content">
-                            <p><strong>Tour Núi Thần Tài 1 Ngày Đà Nẵng</strong>&nbsp;đang là địa điểm được du khách săn đón nhất hiện nay. Đến đây bạn sẽ được trải nghiệm nhiều hoạt động lý thú và hòa mình vào dòng nước tự nhiên, giúp bạn thư giãn một cách hiệu quả.</p><p><strong>Công viên nước vui nhộn:</strong>&nbsp;Nơi đây sẽ mang lại cho bạn những hoạt động trải nghiệm từ đơn giản đến mạo hiểm, dành cho những du khách yêu thích sự khám phá.</p><p><strong>Công viên khủng long Jura Park:</strong>&nbsp;Nơi đây có mô hình khủng long rất sống động, giúp bạn có thể hình dung được sự phát triển của loại động vật này.</p><p><strong>Trải nghiệm tắm mới lạ</strong>: Đến đây, du khách sẽ được trải nghiệm các dịch vụ Tắm trong hồ Jacuzzi; Tắm suối khoáng nóng; Tắm bùn khoáng;...</p><p><strong>Vui chơi hết mình tại đấu trường bùn</strong>: Đây là nơi mà bạn chơi hết mình với các game đại chiến như bắt heo, ném bóng hay ngâm mình trong lớp bùn khoáng, có tác dụng làm đẹp da, tăng cường sức khỏe.</p><p><strong>Chơi game thực tế ảo</strong>: Đây được xem là game công nghệ nổi tiếng, thu hút lượng khách tham gia rất đông đảo khi đến với<span>&nbsp;</span><a href="https://danangbest.com/cong-vien-suoi-khoang-nong-nui-than-tai.html"><strong>núi Thần Tài Đà Nẵng</strong></a>.</p><p><strong>Khám phá động Long Tiên</strong>: Thiết kế bức tượng hình rồng ba đầu lấy ý tưởng từ truyền thuyết con Rồng Cháu Tiên của dân tộc ta.</p><p><strong>Check-in đường hoa phong lan</strong>: Nếu bạn là những tín đồ sống ảo thì đây chắc chắn là địa điểm mà bạn không nên bỏ lỡ. Bạn sẽ choáng ngợp trước khung cảnh rộng 1,5 ha, cùng nhiều loại hoa rực rỡ.</p><div class="se-component se-image-container __se__float- __se__float-none" contenteditable="false"><figure style="margin: 0px;"><img src="https://danangbest.com/uploads/thumb/1686996052suoi-nuoc-nong-than-tai.webp" alt="" data-proportion="true" data-align="none" data-index="0" data-file-name="1686996052suoi-nuoc-nong-than-tai.webp" data-file-size="0" data-origin="," data-size="," data-rotate="" data-rotatex="" data-rotatey="" data-percentage="auto,auto" style=""></figure></div><p><br></p><p><br></p>
-                        </div>
+                            ${tour.getDescription()
+                            }                        </div>
                     </div>
 
                     <div>
                         <h4 class="text-center fw-bold" style="padding-bottom: 16px;">CÁC TOUR KHÁC MÀ BẠN CÓ THỂ THAM KHẢO!</h4>
-                        <div class="d-flex flex-wrap" style="gap: 25px; justify-content: space-between">
+                        <div class="d-flex flex-wrap" style="gap: 25px">
                             <!--items-->
-                            <div class="" style="width: 32%; height: fit-content; border-radius: 16px; overflow: hidden; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; cursor: pointer;">
-                                <div style="">
-                                    <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/489/447/products/1.jpg?v=1687878274650"
-                                         style="width: 100%; height: 250px; border-radius: 16px; object-fit: cover;"/>
-                                </div>
-                                <div>
-                                    <h5 class="d-inline-block  p-3" style="max-width: 100%; margin: 0; max-height: 200px">Đà Nẵng - Bà Nà - Cầu Vàng - Sơn Trà - Biển Mỹ Khê - Hội An - Đà Nẵng</h5>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center px-3">
-                                    <p style="margin: 0;">Khởi hành: Hằng ngày</p>
-                                    <p style="margin: 0;">Thời gian: 3 ngày</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center px-3">
-                                    <p class="" style="font-size: 14px; text-decoration: line-through; margin: 0;">4.900.000</p>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center px-3">
-                                    <p style="font-weight: 600; color: red; margin: 0">4.390.000 đ</p>
-                                    <p style="color: red; font-weight: 600; margin: 0">-9%</p>
-                                </div>
+                            <c:forEach var="tour" items="${tours}">
+                                <div class="" style="width: 32%; height: fit-content; border-radius: 16px; overflow: hidden; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; cursor: pointer;">
+                                    <a href="tourdetails?id=${tour.getId()}" style="text-decoration: none; color: #000;">
+                                        <div style="">
+                                            <img src="${tour.getBackgroundImage()}"
+                                                 style="width: 100%; height: 250px; border-radius: 16px; object-fit: cover;"/>
+                                        </div>
+                                        <div>
+                                            <h5 class="d-inline-block  p-3" style="max-width: 100%; margin: 0; max-height: 200px;
+                                                text-overflow: ellipsis;
+                                                width: 100%;
+                                                white-space: nowrap;
+                                                overflow: hidden;">${tour.getTitle()}</h5>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center px-3">
+                                            <p style="margin: 0;">Khởi hành: ${tour.getStartDay()}</p>
+                                            <p style="margin: 0;">Thời gian: ${tour.getDuration()}</p>
+                                        </div>
 
-                                <div class="p-3 w-100" style="padding-top: 10px !important;">
-                                    <button class="btn btn-warning w-100 fw-bold">Đặt ngay</button>
+                                        <div class="d-flex justify-content-between align-items-center px-3">
+                                            <p style="font-weight: 600; color: red; margin: 0">
+                                                Giá:
+                                                <span> ${tour.getFormattedMaxPrice()} đ</span>
+                                            </p>
+                                            <p style="font-weight: 600; color: red; margin: 0">
+                                                Giá cho trẻ em:
+                                                <span> ${tour.getFormattedMinPrice()} đ</span>
+                                            </p>
+                                        </div>
+                                    </a>
+
+                                    <div class="p-3 w-100" style="padding-top: 10px !important;">
+                                        <button class="btn btn-warning w-100 fw-bold">Đặt ngay</button>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:forEach>
 
                         </div>
                     </div>
