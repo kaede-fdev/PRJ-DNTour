@@ -27,11 +27,13 @@ public class HotelSearchService extends DatabaseContext implements IHotelSearch 
     private static final String getHotelByCityAndStartDateQuery
             = "SELECT * FROM Hotels WHERE LocationId = ? AND createAt <= ? ";
     private static final String getHotelImagesByIdQuery = "SELECT * FROM HotelImages WHERE HotelId = ?";
+    private static final String getHotelByIdQuery = "SELECT * FROM Hotels WHERE Id = ?";
+    private static final String getHotelByMinPriceQuery = "SELECT * FROM Hotels WHERE MinPrice = ? ";
 
     @Override
     public List<Hotel> getAllHotels() {
         List<Hotel> hotels = new ArrayList<>();
-        try ( Connection connection = getConnection();  PreparedStatement statement = connection.prepareStatement(getAllHotelsQuery)) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(getAllHotelsQuery)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Hotel hotel = new Hotel();
@@ -55,12 +57,10 @@ public class HotelSearchService extends DatabaseContext implements IHotelSearch 
         return hotels;
     }
 
-   
-
     @Override
     public List<HotelImages> getHotelImagesById(int hotelId) {
         List<HotelImages> images = new ArrayList<>();
-        try ( Connection connection = getConnection();  PreparedStatement statement = connection.prepareStatement(getHotelImagesByIdQuery)) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(getHotelImagesByIdQuery)) {
             statement.setInt(1, hotelId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -81,7 +81,7 @@ public class HotelSearchService extends DatabaseContext implements IHotelSearch 
     @Override
     public List<Hotel> getHotelbyCityAndStartdate(int cityId, Date startDate) {
         List<Hotel> hotels = new ArrayList<>();
-        try ( Connection connection = getConnection();  PreparedStatement statement = connection.prepareStatement(getHotelByCityAndStartDateQuery)) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(getHotelByCityAndStartDateQuery)) {
             statement.setInt(1, cityId);
             statement.setTimestamp(2, new java.sql.Timestamp(startDate.getTime()));
             ResultSet resultSet = statement.executeQuery();
@@ -115,9 +115,9 @@ public class HotelSearchService extends DatabaseContext implements IHotelSearch 
 //        for (Hotel hotel : arr) {
 //            // Check if hotel meets the price range criteria
 //            if (hotel.getMinPrice() >= min && hotel.getMaxPrice() <= max) {
-//               
+//
 //                if (star.contains(hotel.getStars())) {
-//                   
+//
 //                    filteredHotels.add(hotel);
 //                }
 //            }
@@ -125,4 +125,59 @@ public class HotelSearchService extends DatabaseContext implements IHotelSearch 
 //
 //        return filteredHotels;
 //    }
+    @Override
+    public Hotel getHotelByMinPrice(int minPrice) {
+        Hotel hotel = null;
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(getHotelByMinPriceQuery)) {
+
+            statement.setInt(1, minPrice); // Set the parameter for MinPrice
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                hotel = new Hotel();
+                hotel.setId(resultSet.getInt("Id"));
+                hotel.setLocationId(resultSet.getInt("LocationId"));
+                hotel.setName(resultSet.getString("Name"));
+                hotel.setStars(resultSet.getInt("Stars"));
+                hotel.setDescription(resultSet.getString("Description"));
+                hotel.setAddress(resultSet.getString("Address"));
+                hotel.setOpenUrl(resultSet.getString("OpenUrl"));
+                hotel.setMapEmbed(resultSet.getString("MapEmbed"));
+                hotel.setMinPrice(resultSet.getInt("MinPrice"));
+                hotel.setMaxPrice(resultSet.getInt("MaxPrice"));
+                hotel.setCreateAt(resultSet.getTimestamp("createAt"));
+                hotel.setUpdateAt(resultSet.getTimestamp("updateAt"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return hotel;
+    }
+
+    @Override
+    public Hotel getHotelById(int hotelId) {
+        Hotel hotel = null;
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(getHotelByIdQuery)) {
+            statement.setInt(1, hotelId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                hotel = new Hotel();
+                hotel.setId(resultSet.getInt("Id"));
+                hotel.setLocationId(resultSet.getInt("LocationId"));
+                hotel.setName(resultSet.getString("Name"));
+                hotel.setStars(resultSet.getInt("stars"));
+                hotel.setDescription(resultSet.getString("Description"));
+                hotel.setAddress(resultSet.getString("Address"));
+                hotel.setOpenUrl(resultSet.getString("OpenUrl"));
+                hotel.setMapEmbed(resultSet.getString("MapEmbed"));
+                hotel.setMinPrice(resultSet.getInt("MinPrice"));
+                hotel.setMaxPrice(resultSet.getInt("MaxPrice"));
+                hotel.setCreateAt(resultSet.getTimestamp("createAt"));
+                hotel.setUpdateAt(resultSet.getTimestamp("updateAt"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return hotel;
+    }
 }

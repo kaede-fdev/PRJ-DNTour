@@ -13,8 +13,13 @@ import model.RestaurantImages;
  */
 public interface IRestaurantSearch {
 
-     List<Restaurant> getAllRestaurants();
+    List<Restaurant> getAllRestaurants();
+
     List<Restaurant> getRestaurantByCityAndStartdate(int cityId, Date startDate);
+
     List<RestaurantImages> getRestaurantImagesById(int restaurantId);
-  
+
+    Restaurant getRestaurantById(int restaurantId);
+
+    Restaurant getRestaurantByMinPrice(int minPrice);
 }

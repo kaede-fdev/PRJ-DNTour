@@ -41,6 +41,7 @@
         <section class="w-100">
             <div class="container">
                 <div style="padding-top: 80px;">
+
                     <h1 class="w-full text-center fw-bold">${tour.getTitle()}</h1>
                     <div class="d-flex flex-wrap justify-content-center p-4" style="gap: 20px; background: #fff; border-radius: 20px;  color: #000;">
                         <div class="d-flex align-items-center justify-content-center gap-2">

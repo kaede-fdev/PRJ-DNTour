@@ -109,7 +109,7 @@
 
             </div>
             <div class=" mx-auto my-5 section3 position-relative ">
-                <div class="w-100 d-flex justify-content-center" style="background:;">
+                <div class="w-100 d-flex justify-content-center">
                     <img src="https://i.natgeofe.com/k/d2701667-c426-4a1b-8d75-d01bdc387fdc/vietnam-ha-long-bay_16x9.jpg?w=1200"
                          style="width: 80%; height: 500px;"
                          class=" object-fit-cover"></div>

@@ -17,4 +17,7 @@ public interface IHotelSearch {
 
     public List<HotelImages> getHotelImagesById(int hotelId);
 
+    public Hotel getHotelById(int hotelId);
+
+    public Hotel getHotelByMinPrice(int minPrice);
 }

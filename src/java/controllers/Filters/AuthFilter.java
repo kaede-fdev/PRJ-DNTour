@@ -41,6 +41,8 @@ public class AuthFilter implements Filter {
         "/paymentreturn",
         "/introduce",
         "/restaurantsearch",
+        "/contact",
+        "/tourUpdate",
         "/hotelsearch"};
 
     public AuthFilter() {

@@ -8,6 +8,10 @@
         <servlet-name>TourDetailsServlet</servlet-name>
         <url-pattern>/tourdetails</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TourUpdateServlet</servlet-name>
+        <url-pattern>/tourUpdate</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

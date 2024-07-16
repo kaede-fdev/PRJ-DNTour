@@ -18,6 +18,8 @@ public class RestaurantSearchService extends DatabaseContext implements IRestaur
     private static final String getAllRestaurantsQuery = "SELECT * FROM Restaurants";
     private static final String getRestaurantByCityAndStartDateQuery = "SELECT * FROM Restaurants WHERE LocationId = ? AND createAt <= ?";
     private static final String getRestaurantImagesByIdQuery = "SELECT * FROM RestaurantImages WHERE RestaurantId = ?";
+    private static final String getRestaurantByIdQuery = "SELECT * FROM Restaurants WHERE Id = ?";
+    private final String getRestaurantByMinPriceQuery = "SELECT * FROM Restaurants WHERE MinPrice = ? ";
 
     @Override
     public List<Restaurant> getAllRestaurants() {
@@ -33,7 +35,7 @@ public class RestaurantSearchService extends DatabaseContext implements IRestaur
                 restaurant.setAddress(resultSet.getString("Address"));
                 restaurant.setOpenUrl(resultSet.getString("OpenUrl"));
                 restaurant.setMapEmbed(resultSet.getString("MapEmbed"));
-              
+
                 restaurant.setMinPrice(resultSet.getInt("MinPrice"));
                 restaurant.setMaxPrice(resultSet.getInt("MaxPrice"));
                 restaurant.setCreateAt(resultSet.getDate("CreateAt"));
@@ -83,7 +85,7 @@ public class RestaurantSearchService extends DatabaseContext implements IRestaur
                 restaurant.setAddress(resultSet.getString("Address"));
                 restaurant.setOpenUrl(resultSet.getString("OpenUrl"));
                 restaurant.setMapEmbed(resultSet.getString("MapEmbed"));
-               
+
                 restaurant.setMinPrice(resultSet.getInt("MinPrice"));
                 restaurant.setMaxPrice(resultSet.getInt("MaxPrice"));
                 restaurant.setCreateAt(resultSet.getDate("CreateAt"));
@@ -95,4 +97,59 @@ public class RestaurantSearchService extends DatabaseContext implements IRestaur
         }
         return restaurants;
     }
+
+    @Override
+    public Restaurant getRestaurantByMinPrice(int minPrice) {
+        Restaurant restaurant = null;
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(getRestaurantByMinPriceQuery)) {
+
+            statement.setInt(1, minPrice); // Set the parameter for MinPrice
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                restaurant = new Restaurant();
+                restaurant.setId(resultSet.getInt("Id"));
+                restaurant.setLocationId(resultSet.getInt("LocationId"));
+                restaurant.setName(resultSet.getString("Name"));
+                restaurant.setStyles(resultSet.getString("Styles"));
+                restaurant.setAddress(resultSet.getString("Address"));
+                restaurant.setOpenUrl(resultSet.getString("OpenUrl"));
+                restaurant.setMapEmbed(resultSet.getString("MapEmbed"));
+                restaurant.setMinPrice(resultSet.getInt("MinPrice"));
+                restaurant.setMaxPrice(resultSet.getInt("MaxPrice"));
+                restaurant.setCreateAt(resultSet.getTimestamp("CreateAt"));
+                restaurant.setUpdateAt(resultSet.getTimestamp("UpdateAt"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return restaurant;
+    }
+
+    @Override
+    public Restaurant getRestaurantById(int restaurantId) {
+        Restaurant restaurant = null;
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(getRestaurantByIdQuery)) {
+            statement.setInt(1, restaurantId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                restaurant = new Restaurant();
+                restaurant.setId(resultSet.getInt("Id"));
+                restaurant.setLocationId(resultSet.getInt("LocationId"));
+                restaurant.setName(resultSet.getString("Name"));
+                restaurant.setStyles(resultSet.getString("Styles"));
+                restaurant.setAddress(resultSet.getString("Address"));
+                restaurant.setOpenUrl(resultSet.getString("OpenUrl"));
+                restaurant.setMapEmbed(resultSet.getString("MapEmbed"));
+                restaurant.setMinPrice(resultSet.getInt("MinPrice"));
+                restaurant.setMaxPrice(resultSet.getInt("MaxPrice"));
+                restaurant.setCreateAt(resultSet.getDate("CreateAt"));
+                restaurant.setUpdateAt(resultSet.getDate("UpdateAt"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return restaurant;
+    }
+
 }
